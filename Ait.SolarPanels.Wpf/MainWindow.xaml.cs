@@ -22,6 +22,7 @@ namespace Ait.SolarPanels.Wpf
         }
         PanelService panelService;
         Socket mainSocket;
+        IPEndPoint myEndpoint;
         bool serverOnline;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -38,14 +39,20 @@ namespace Ait.SolarPanels.Wpf
             StartupConfig();
             tblCommunication.Text = HandleInstruction("GETDATA|3") + tblCommunication.Text;
         }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            btnStopServer_Click(null, null);
+        }
         public static void DoEvents()
         {
             try
             {
-                System.Windows.Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate { }));
+                    System.Windows.Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate { }));
             }
-            catch
-            { }
+            catch (Exception fout)
+            {
+                System.Windows.Application.Current.Dispatcher.DisableProcessing();
+            }
         }
         private void StartupConfig()
         {
@@ -73,12 +80,10 @@ namespace Ait.SolarPanels.Wpf
             }
             btnStartServer.Visibility = Visibility.Visible;
             btnStopServer.Visibility = Visibility.Hidden;
-            //grpCarPark.Visibility = Visibility.Hidden;
         }
         private void CmbIPs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SaveConfig();
-        }
+            SaveConfig();        }
 
         private void CmbPorts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -127,7 +132,7 @@ namespace Ait.SolarPanels.Wpf
             catch
             { }
             mainSocket = null;
-
+            myEndpoint = null;
         }
         private void StartTheServer()
         {
@@ -137,7 +142,7 @@ namespace Ait.SolarPanels.Wpf
         {
             IPAddress ip = IPAddress.Parse(cmbIPs.SelectedItem.ToString());
             int port = int.Parse(cmbPorts.SelectedItem.ToString());
-            IPEndPoint myEndpoint = new IPEndPoint(ip, port);
+            myEndpoint = new IPEndPoint(ip, port);
             mainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             try
@@ -202,6 +207,10 @@ namespace Ait.SolarPanels.Wpf
                 int.TryParse(parts[2], out maxPowerPerSquareMeter);
                 int id = panelService.Panels.Count + 1;
                 panelService.AddPanel(id, surface, maxPowerPerSquareMeter);
+
+                tblCommunication.Text = $"New panel added : ID = {id} - Surface = {surface}m² - Pw/m² = {maxPowerPerSquareMeter}W\n" + tblCommunication.Text;
+                tblCommunication.Text = $"Sending new panelset to controller ...\n" + tblCommunication.Text;
+
                 StringBuilder sb = new StringBuilder();
                 foreach (Core.Entities.Panel panel in panelService.Panels)
                 {
@@ -264,7 +273,7 @@ namespace Ait.SolarPanels.Wpf
                         }
                     }
                 }
-                return sb.ToString() + "##EOM";
+                return sb.ToString();
             }
             else if (instruction.Length >= 7 && instruction.Substring(0, 7) == "CONNECT")
             {
@@ -281,5 +290,7 @@ namespace Ait.SolarPanels.Wpf
             else
                 return "";
         }
+
+
     }
 }

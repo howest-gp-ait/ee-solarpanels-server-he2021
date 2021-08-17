@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ait.SolarPanels.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800" Loaded="Window_Loaded">
+        Title="MainWindow" Height="600" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
 
 
@@ -26,9 +26,11 @@
                 <ListBox x:Name="lstPanels" HorizontalAlignment="Center" Height="400" Margin="0,17,0,0" VerticalAlignment="Top" Width="287"/>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="grpCommunication" Header="Communication" HorizontalAlignment="Left" Height="461" Margin="370,100,0,0" VerticalAlignment="Top" Width="333">
+        <GroupBox x:Name="grpCommunication" Header="Communication" HorizontalAlignment="Left" Height="461" Margin="370,100,0,0" VerticalAlignment="Top" Width="411">
             <Grid>
-                <TextBlock x:Name="tblCommunication" HorizontalAlignment="Left" Margin="14,14,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="407" Width="286" />
+                <ScrollViewer>
+                    <TextBlock x:Name="tblCommunication" Text="" TextWrapping="Wrap" Height="auto"  />
+                </ScrollViewer>
             </Grid>
         </GroupBox>
     </Grid>
