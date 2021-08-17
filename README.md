@@ -45,7 +45,7 @@ De server begrijpt 3 instructies :
       De client zal op dat moment de inhoud van zijn controls terug bijstellen (zie opdracht client app).
       
       
-      
+Nog een laatste opmerking i.v.m. deze server app : deze app is NIET "bulletproof" ... het kan dus zijn dat je door verkeerde manipulatie (lees fout opdrachten) de app kan doen crashen.  Start de server dan gewoon opnieuw op zodat je verder kan testen ...
       
       
       
