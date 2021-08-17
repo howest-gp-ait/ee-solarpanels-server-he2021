@@ -4,7 +4,7 @@
 ### JE HOEFT AAN DEZE CODE NIETS TE WIJZIGEN
 ### JE START DE APPLICATIE EN JE START DE SERVER (noteer IP en poort).
   
-#### JOUW CLIENT APP DIENT ALLEEN MAAR DE CORRECTE INSTRUCTIES NAAR DEZE APP TE STUREN EN INDIEN JE VRAGEN CORRECT ZIJN ZAL DE SERVER REAGEREN  
+#### JOUW CLIENT APP DIENT ALLEEN MAAR DE CORRECTE INSTRUCTIES NAAR DEZE APP TE STUREN EN INDIEN JE VRAGEN CORRECT ZIJN ZAL DE SERVER REAGEREN.  WAT JE MET DE ANTWOORDEN VAN DE SERVER APP MOET DOEN KAN JE LEZEN IN DE REPO VAN DE CLIENT APP
   
 
 ![demo](assets/server.png)  
@@ -34,17 +34,17 @@ De server begrijpt 3 instructies :
         * 1 = zwaarbewolkt  
         * 2 = lichtbewolkt
         * 3 = overwegend zon
-        * 4 = volle zon
+        * 4 = volle zon  
       De tekst die de server zal retourneren (terug GEEN extensie ##EOM) zal de client dan in zijn venster afbeelden (zie opdracht client app).  
         
     * **ADD|3|250##EOM**  
       Het woord ADD wordt dus gevolgd door een | symbool met daarna een getal dat verwijst naar de oppervlakte van een nieuw paneel : dit **moeten** de waarden 2, 3, 4 of 5 zijn (hier dus 3). Je zal straks zien in de client app dat dit geen probleem zal zijn gezien de waarden afkomstig zullen zijn van een (reeds gemaakte) keuzelijst.  
       Dat getal wordt opnieuw gevolgd door een | symbool en vervolgens opnieuw een getal (hier dus 250).  Deze waarde staat voor het maximaal vermogen per m² en **moet* 150, 200, 250 of 300 zijn.  Je zal straks zien in de client app dat dit geen probleem zal zijn gezien de waarden afkomstig zullen zijn van een (reeds gemaakte) keuzelijst.  
       Wanneer de server deze opdracht ontvangt zal een extra paneel aangemaakt worden (het ID bepaalt de server zelf, de rest is op basis van de hier meegeleverde waarden).  
-      Vervolgens zal de server hetzelfde terugsturen als bij de CONNECT instructie, namelijk een tekst met daarin alle ID's van de panelen, bijvoorbeeld **1|2|3|4|5|6** 
-      De client zal op dat moment de inhoud van zijn controls terug bijstellen (zie opdracht client app).
+      Vervolgens zal de server hetzelfde terugsturen als bij de CONNECT instructie, namelijk een tekst met daarin alle ID's van de panelen, bijvoorbeeld **1|2|3|4|5|6**  
+      De client zal op dat moment de inhoud van zijn controls terug bijstellen (zie opdracht client app).  
       
-      
+   
 Nog een laatste opmerking i.v.m. deze server app : deze app is NIET "bulletproof" ... het kan dus zijn dat je door verkeerde manipulatie (lees fout opdrachten) de app kan doen crashen.  Start de server dan gewoon opnieuw op zodat je verder kan testen ...
       
       
